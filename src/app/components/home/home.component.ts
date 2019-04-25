@@ -1,6 +1,7 @@
 import { SpotifyService } from './../../services/spotify.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+// tslint:disable: no-string-literal
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ export class HomeComponent implements OnInit {
   constructor(private spotify: SpotifyService) {
     this.spotify.getNewReleases()
                 .subscribe( (data): any => {
-                  this.nuevasCanciones = data['albums'].items;
+                  this.nuevasCanciones = data;
                   console.log(this.nuevasCanciones);
                 });
   }
