@@ -1,3 +1,36 @@
-<p>
-  artista works!
-</p>
+<app-loading *ngIf="loading"></app-loading>
+
+<div *ngIf="!loading" class="row animated fadeIn slow mt-5">
+    <div class="col-2">
+        <a [href]="artista['external_urls']['spotify']" target="_blank"> <img [src]="artista['images'] | noimage" class="img-thumbnail"></a>
+    </div>
+    <div class="col">
+        <h3>{{artista.name}}</h3>
+        <p>
+            <a [href]="artista['external_urls']['spotify']" target="_blank">Página del artista</a>
+        </p>
+    </div>
+    <div class="col-3 text-right">
+        <button class="btn btn-outline-danger" style="border-radius: 20px;" routerLink="/home">Regresar</button>
+    </div>
+
+    <table class="table mw-100">
+        <thead class="thead-inverse col-12">
+            <tr>
+                <th scope="col">Nombre de la pista</th>
+                <th scope="col">Artista(s)</th>
+                <th scope="col">Duración</th>
+                <th scope="col">♥</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let track of topTracks">
+                <td class="text-white" scope="row"> {{track.name}}</td>
+                <td class="text-white" scope="row"> {{track.artists | printArtist }}</td>
+                <td class="text-white" scope="row"> {{track.duration_ms | toMinutes }} </td>
+                <td class="text-white puntero" scope="row">♥</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

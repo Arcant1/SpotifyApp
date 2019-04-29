@@ -1,5 +1,6 @@
 import { RouterModule } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { SpotifyService } from 'src/app/services/spotify.service';
 
 
 @Component({
@@ -7,13 +8,20 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
-  constructor( _routerModule: RouterModule) {
-    
-   }
+  artistas: any[] = [];
+  loading: boolean;
 
-  ngOnInit() {
+  constructor(private spotify: SpotifyService) {
+  }
+
+  buscar(termino: string) {
+    this.loading = true;
+    this.spotify.getArtistas(termino).subscribe((data): any => {
+      this.artistas = data;
+      this.loading = false;
+      });
   }
 
 }

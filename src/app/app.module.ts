@@ -10,6 +10,10 @@ import { SearchComponent } from './components/search/search.component';
 import { ArtistaComponent } from './components/artista/artista.component';
 import { AlbumComponent } from './components/album/album.component';
 import { NoimagePipe } from './pipes/noimage.pipe';
+import { TarjetasComponent } from './components/tarjetas/tarjetas.component';
+import { LoadingComponent } from './components/shared/loading/loading.component';
+import { PrintArtistPipe } from './pipes/print-artist.pipe';
+import { ToMinutesPipe } from './pipes/to-minutes.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { NoimagePipe } from './pipes/noimage.pipe';
     SearchComponent,
     ArtistaComponent,
     AlbumComponent,
-    NoimagePipe
+    NoimagePipe,
+    TarjetasComponent,
+    LoadingComponent,
+    PrintArtistPipe,
+    ToMinutesPipe
   ],
   imports: [
     BrowserModule,
