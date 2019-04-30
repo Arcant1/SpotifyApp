@@ -14,6 +14,7 @@ import { TarjetasComponent } from './components/tarjetas/tarjetas.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
 import { PrintArtistPipe } from './pipes/print-artist.pipe';
 import { ToMinutesPipe } from './pipes/to-minutes.pipe';
+import { DomseguroPipe } from './pipes/domseguro.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ToMinutesPipe } from './pipes/to-minutes.pipe';
     TarjetasComponent,
     LoadingComponent,
     PrintArtistPipe,
-    ToMinutesPipe
+    ToMinutesPipe,
+    DomseguroPipe
   ],
   imports: [
     BrowserModule,

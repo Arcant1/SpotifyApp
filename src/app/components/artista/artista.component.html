@@ -2,21 +2,22 @@
 
 <div *ngIf="!loading" class="row animated fadeIn slow mt-5">
     <div class="col-2">
-        <a [href]="artista['external_urls']['spotify']" target="_blank"> <img [src]="artista['images'] | noimage" class="img-thumbnail"></a>
+        <a [href]="artista['external_urls']['spotify']" target="_blank"> <img [src]="artista['images'] | noimage" class="img-thumbnail img-circle"></a>
     </div>
     <div class="col">
-        <h3>{{artista.name}}</h3>
+        <h3 style="color: #fafafa ">{{artista.name}}</h3>
         <p>
-            <a [href]="artista['external_urls']['spotify']" target="_blank">Página del artista</a>
+            <a [href]="artista['external_urls']['spotify']" target="_blank" class="green-link">Página del artista</a>
         </p>
     </div>
     <div class="col-3 text-right">
         <button class="btn btn-outline-danger" style="border-radius: 20px;" routerLink="/home">Regresar</button>
     </div>
 
-    <table class="table mw-100">
+    <table class="table mt-3">
         <thead class="thead-inverse col-12">
             <tr>
+                <th scope="col">Vista previa</th>
                 <th scope="col">Nombre de la pista</th>
                 <th scope="col">Artista(s)</th>
                 <th scope="col">Duración</th>
@@ -26,7 +27,10 @@
         </thead>
         <tbody>
             <tr *ngFor="let track of topTracks">
-                <td class="text-white" scope="row"> {{track.name}}</td>
+                <td class="text-white puntero" scope="row">
+                    <iframe [src]="track.uri | domseguro: 'https://open.spotify.com/embed?uri='" width="80" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                </td>
+                <td class="text-white puntero green-link" scope="row"> {{track.name}} </td>
                 <td class="text-white" scope="row"> {{track.artists | printArtist }}</td>
                 <td class="text-white" scope="row"> {{track.duration_ms | toMinutes }} </td>
                 <td class="text-white puntero" scope="row">♥</td>
