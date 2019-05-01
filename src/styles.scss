@@ -2,7 +2,7 @@
 
 body {
     background-color: black;
-    color: white !important;
+    color: whitesmoke !important;
 }
 
 hr {
@@ -20,6 +20,31 @@ hr {
 .img-circle {
     border-radius: 100%;
     width: 150px;
+}
+
+.vistaPrevia {
+    max-width: 30px !important;
+}
+
+table {
+    width: 100%;
+    margin: 20px;
+    border: 1px solid whitesmoke;
+    tr {
+        height: 40px;
+        max-height: 40px !important;
+    }
+    td {
+        text-align: center !important;
+        vertical-align: middle !important;
+        padding: 5px;
+        border: 1px solid whitesmoke;
+        color: #fafafa;
+    }
+    th {
+        text-align: center !important;
+        border: 1px solid whitesmoke;
+    }
 }
 
 .green-link:hover {

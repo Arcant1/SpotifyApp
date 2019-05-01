@@ -2,39 +2,45 @@
 
 <div *ngIf="!loading" class="row animated fadeIn slow mt-5">
     <div class="col-2">
-        <a [href]="artista['external_urls']['spotify']" target="_blank"> <img [src]="artista['images'] | noimage" class="img-thumbnail img-circle"></a>
+        <a [href]="external_url"><img [src]="imgurl | noimage" class="img-thumbnail img-circle"></a>
     </div>
     <div class="col">
-        <h3 style="color: #fafafa ">{{artista.name}}</h3>
+        <h3 style="color: #fafafa"> {{nombreArtista}} </h3>
         <p>
-            <a [href]="artista['external_urls']['spotify']" target="_blank" class="green-link">Página del artista</a>
+            <a [href]="external_url" target="_blank" class="green-link">Página del artista</a>
         </p>
     </div>
     <div class="col-3 text-right">
         <button class="btn btn-outline-danger" style="border-radius: 20px;" routerLink="/home">Regresar</button>
     </div>
+</div>
 
-    <table class="table mt-3">
-        <thead class="thead-inverse col-12">
-            <tr>
-                <th scope="col">Vista previa</th>
-                <th scope="col">Nombre de la pista</th>
-                <th scope="col">Artista(s)</th>
-                <th scope="col">Duración</th>
-                <th scope="col">♥</th>
+<div>
+    <h1 class="mb-5 mt-5">Albumes</h1>
+    <div *ngFor="let album of albumes; let i=index;">
+        <h1>{{alb[i].name}}</h1>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="vistaPrevia">Vista previa</th>
+                        <th>Nombre de la pista</th>
+                        <th>Duración</th>
+                        <th>♥</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let track of albumes[i]; let j=index;">
+                        <td><iframe [src]="track.uri | domseguro: 'https://open.spotify.com/embed?uri='" height="30" width="30" frameborder="1" allowtransparency="true" allow="encrypted-media"></iframe></td>
+                        <td class="green-link puntero"> {{track.name}} </td>
+                        <td> {{track.duration_ms | toMinutes }} </td>
+                        <td *ngIf="isFav(track.id, track.name)" class="green-link puntero" (click)="addFav(track.id, track.name)">♥</td>
+                        <td *ngIf="!isFav(track.id, track.name)" class="green-link puntero" (click)="addFav(track.id, track.name)">☺</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br><br><br>
 
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let track of topTracks">
-                <td class="text-white puntero" scope="row">
-                    <iframe [src]="track.uri | domseguro: 'https://open.spotify.com/embed?uri='" width="80" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                </td>
-                <td class="text-white puntero green-link" scope="row"> {{track.name}} </td>
-                <td class="text-white" scope="row"> {{track.artists | printArtist }}</td>
-                <td class="text-white" scope="row"> {{track.duration_ms | toMinutes }} </td>
-                <td class="text-white puntero" scope="row">♥</td>
-            </tr>
-        </tbody>
-    </table>
+    </div>
 </div>

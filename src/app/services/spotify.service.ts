@@ -9,14 +9,12 @@ import { map } from 'rxjs/operators';
 })
 export class SpotifyService {
 
-  constructor(private http: HttpClient) {
-    console.log('-- Spotify service ready --');
-   }
+  constructor(private http: HttpClient) {}
 
   getQuery(query: string) {
     const url = `https://api.spotify.com/v1/${ query }`;
     const headers = new HttpHeaders({
-      Authorization: 'Bearer BQDVtWmNLL5j-sdSf_yInpfu-Zyn7S-7d12k3jR2JhIxv3sYlJIZqX413nvgY01nY4VceU23OFzz5Y1h2aZqU9pA2_g6otA8lmM59kC-6FbBqvGbTEW1Uh-tG54SOQSPwxVMvQ-Uzt0pcOocB4r7X5MdVLc-eoVaeanMJw'
+      Authorization: 'Bearer BQD1aXeHqJm3laipY7rq1NIxw49zSMS1DwXYyekDnMD8Dwy1R3ZBxlaY_v9d8XqeMcjk_KAxPqs0irah-IfglnInXurABMfFekPuOFLuxp0grg3fMDeW7pj2XQlGPkFP4jTiWx09mXU3BUefJwYUZi9fsQYcjB-eBHsA9A'
     });
 
     return this.http.get(url, { headers });
@@ -31,11 +29,26 @@ export class SpotifyService {
   }
 
   getArtista(id: string) {
-    return this.getQuery(`artists/${ id }`); // .pipe(map(data => console.log(data)));
+    return this.getQuery(`artists/${ id }`);
   }
 
   getTopTracks( id: string) {
     return this.getQuery(`artists/${id}/top-tracks?country=ar`).pipe( map ( data => data['tracks']));
   }
 
+  getTrack ( id: string ) {
+    return this.getQuery(`tracks/${id}`);
+  }
+
+  getAlbumTracks( id: string) {
+    return this.getQuery(`albums/${id}/tracks`)
+  }
+
+  getAlbum( id: string) {
+    return this.getQuery(`albums/${id}`).pipe( map ( data => data));;
+  }
+
+  getAlbumes( id: string) {
+    return this.getQuery(`artists/${id}/albums?limit=5`).pipe( map (data => data));
+  }
 }

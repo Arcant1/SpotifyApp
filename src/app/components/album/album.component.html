@@ -1,3 +1,39 @@
-<p>
-  album works!
-</p>
+<app-loading *ngIf="loading"></app-loading>
+
+<div *ngIf="!loading" class="row animated fadeIn slow mt-5">
+    <div class="col-2">
+        <a [href]="url" target="_blank"> <img [src]="imgUrl" alt="" width="150px"> </a>
+    </div>
+    <div class="col">
+        <h3 style="color: #fafafa">{{nombreAlbum}}</h3>
+        <p>
+            <a [href]="url" target="_blank" class="green-link">Página del artista</a>
+        </p>
+    </div>
+    <div class="col-3 text-right">
+        <button class="btn btn-outline-danger" style="border-radius: 20px;" routerLink="/home">Regresar</button>
+    </div>
+
+    <table class="table mt-3">
+        <thead class="thead-inverse col-12">
+            <tr>
+                <th scope="col">Vista previa</th>
+                <th scope="col">Nombre de la pista</th>
+                <th scope="col">Artista(s)</th>
+                <th scope="col">Duración</th>
+                <th scope="col">♥</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let track of album" style="text">
+                <td scope="row"><iframe [src]="track.uri | domseguro: 'https://open.spotify.com/embed?uri='" width="80" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
+                <td scope="row" class="green-link puntero"> {{track.name}} </td>
+                <td scope="row"> {{track.artists | printArtist }}</td>
+                <td scope="row"> {{track.duration_ms | toMinutes }} </td>
+                <td *ngIf="isFav(track.id, track.name)" scope="row" class="green-link puntero" (click)="addFav(track.id, track.name)">♥</td>
+                <td *ngIf="!isFav(track.id, track.name)" scope="row" class="green-link puntero" (click)="addFav(track.id, track.name)">☺</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
